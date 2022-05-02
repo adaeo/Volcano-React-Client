@@ -1,38 +1,85 @@
-.App {
-  text-align: center;
+/* Simple browser reset */
+* {
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+html,
+body {
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+  background: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.auto-width {
+  width: auto;
+}
+
+.no-padding {
+  padding: 0;
+}
+
+.vertical-center {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  margin-bottom: 0;
 }
 
-.App-link {
-  color: #61dafb;
+.navBar {
+  background: #252323;
+  color: #ffffff;
+  padding: 10px 30px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.nav a {
+  color: #ffffff;
+  text-decoration: none;
+  transition: 0.2s ease all;
+}
+
+.nav a:hover {
+  background: #f86624;
+  color: #ffffff;
+}
+
+.nav a:focus {
+  color: inherit;
+}
+
+.containerType {
+  padding-top: 2vh;
+  padding-left: 2vw;
+}
+
+.formType .error {
+  color: red;
+}
+
+.formType .formButton {
+  background: #252323;
+}
+
+.formType .formButton:hover {
+  background: #f86624;
+}
+
+.formType .formButton:focus {
+  background-color: #f86624;
+}
+
+.caret {
+  padding-left: 8px;
+  background: #252323;
+}
+
+.caret:hover {
+  background: #f86624;
+}
+
+.caret:focus {
+  background-color: #f86624;
 }
