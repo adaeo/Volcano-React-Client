@@ -21,7 +21,7 @@ export default function Navigation(props) {
               Volcano List
             </NavLink>
           </NavItem>
-          {props.login === null && ( // Using logical && Inline if
+          {!props.cookies.token && ( // Using logical && Inline if
             <NavItem>
               <NavLink to="/register" tag={Link}>
                 Register
@@ -30,7 +30,7 @@ export default function Navigation(props) {
           )}
           <NavItem>
             <NavLink to="/login" tag={Link}>
-              {props.login === null ? "Login" : "Logout"}
+              {props.cookies.token ? "Logout" : "Login"}
             </NavLink>
           </NavItem>
         </Nav>

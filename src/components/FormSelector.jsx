@@ -5,7 +5,6 @@ import {
   Form,
   Button,
   Input,
-  FormGroup,
   Label,
   Dropdown,
   DropdownToggle,
@@ -15,87 +14,149 @@ import {
 
 export default function VolcanoList(props) {
   const countries = props.countries;
+  const ranges = props.ranges;
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [query, setQuery] = useState(props.country);
+  const [isOpenCountry, setIsOpenCountry] = useState(false);
+  const [isOpenRange, setIsOpenRange] = useState(false);
+  const [queryCountry, setQueryCountry] = useState(props.country);
+  const [queryRange, setQueryRange] = useState(props.range);
   // show max of 5 items
   const [countrySuggestions, setCountrySuggestions] = useState(
-    countries.slice(0, 5)
+    countries.slice(0, 10)
   );
 
   function filterResults(value) {
     if (value !== "") {
-      let result = countries.filter((item) => item.includes(value));
-      setCountrySuggestions(result.slice(0, 5));
+      let result = countries.filter((item) => {
+        return item.toLowerCase().includes(value.toLowerCase());
+      });
+      setCountrySuggestions(result.slice(0, 10));
     } else {
-      setCountrySuggestions(countries.slice(0, 5));
+      setCountrySuggestions(countries.slice(0, 10));
     }
   }
 
-  function toggleDropdown() {
-    isOpen === false ? setIsOpen(true) : setIsOpen(false);
+  function toggleDropdownCountry() {
+    isOpenCountry === false ? setIsOpenCountry(true) : setIsOpenCountry(false);
   }
 
-  function handleQuery(event) {
-    setQuery(event.target.value);
+  function toggleDropdownRange() {
+    isOpenRange === false ? setIsOpenRange(true) : setIsOpenRange(false);
+  }
+
+  function handleQuery(event, setOpenType) {
+    setQueryCountry(event.target.value);
     filterResults(event.target.value);
-    setIsOpen(true);
+    setOpenType(true);
   }
 
-  function handleDropdownSelect(value) {
-    setQuery(value);
+  function handleDropdownSelect(value, handle) {
+    handle(value);
   }
 
   function DropdownItemComponent(props) {
     return (
-      <DropdownItem onClick={() => handleDropdownSelect(props.value)}>
+      <DropdownItem
+        onClick={() => handleDropdownSelect(props.value, props.handle)}
+      >
         {props.value}
       </DropdownItem>
     );
   }
 
+  function DropdownRangeComponent() {
+    return (
+      <Col className="auto-width vertical-center">
+        <div className="mb-0">
+          <Row xs="auto">
+            <Col className="auto-width vertical-center">
+              <Label className="vertical-center" for="country">
+                Populated within:
+              </Label>
+            </Col>
+            <Col className="no-padding-left auto-width vertical-center">
+              <Dropdown isOpen={isOpenRange} toggle={toggleDropdownRange}>
+                <DropdownToggle className="caret" caret>
+                  {queryRange}
+                </DropdownToggle>
+                <DropdownMenu>
+                  {ranges.map((range) => (
+                    <DropdownItemComponent
+                      key={range}
+                      value={range}
+                      handle={setQueryRange}
+                    />
+                  ))}
+                </DropdownMenu>
+              </Dropdown>
+            </Col>
+          </Row>
+        </div>
+      </Col>
+    );
+  }
+
   function handleSubmit() {
-    if (query === "") {
+    if (queryCountry === "") {
       props.setCountry(0); // Return empty code
     } else {
-      props.setCountry(query);
+      props.setCountry(
+        // Submit capatalised word.
+        queryCountry.charAt(0).toUpperCase() + queryCountry.slice(1)
+      );
     }
+    props.setRange(queryRange);
   }
 
   return (
-    <Form>
-      <FormGroup>
-        <Row xs="auto">
-          <Col className="auto-width vertical-center">
-            <Label className="vertical-center" for="country">
-              Country
-            </Label>
-          </Col>
-          <Col className="auto-width">
-            <Dropdown isOpen={isOpen} toggle={toggleDropdown}>
-              <Row xs="auto">
-                <Col className="auto-width no-padding">
-                  <Input
-                    id="search"
-                    name="search"
-                    value={query}
-                    onChange={handleQuery}
-                  ></Input>
-                </Col>
-                <Col className="auto-width no-padding">
-                  <DropdownToggle className="caret" caret></DropdownToggle>
-                </Col>
-              </Row>
-              <DropdownMenu>
-                {countrySuggestions.map((country) => (
-                  <DropdownItemComponent key={country} value={country} />
-                ))}
-              </DropdownMenu>
-            </Dropdown>
-          </Col>
-        </Row>
-      </FormGroup>
-      <Button onClick={handleSubmit}>Submit</Button>
+    <Form className="formType mb-3">
+      <Row xs="auto">
+        <Col className="auto-width vertical-center">
+          <div className="mb-0">
+            <Row xs="auto">
+              <Col className="auto-width vertical-center">
+                <Label className="vertical-center" for="country">
+                  Country:
+                </Label>
+              </Col>
+              <Col className="auto-width">
+                <Dropdown isOpen={isOpenCountry} toggle={toggleDropdownCountry}>
+                  <Row xs="auto">
+                    <Col className="auto-width no-padding">
+                      <Input
+                        id="countrySearch"
+                        name="countrySearch"
+                        value={queryCountry}
+                        onChange={(event) => {
+                          handleQuery(event, setIsOpenCountry);
+                        }}
+                      ></Input>
+                    </Col>
+                    <Col className="auto-width no-padding">
+                      <DropdownToggle className="caret" caret></DropdownToggle>
+                    </Col>
+                  </Row>
+                  <DropdownMenu>
+                    {countrySuggestions.map((country) => (
+                      <DropdownItemComponent
+                        key={country}
+                        value={country}
+                        handle={setQueryCountry}
+                      />
+                    ))}
+                  </DropdownMenu>
+                </Dropdown>
+              </Col>
+            </Row>
+          </div>
+        </Col>
+        {props.token !== null && <DropdownRangeComponent />}
+        <Col className="auto-width vertical-center">
+          <Button className="formButton" onClick={handleSubmit}>
+            Submit
+          </Button>
+        </Col>
+      </Row>
     </Form>
   );
 }

@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState } from "react";
 import { useCookies } from "react-cookie";
 
 // styles import
@@ -12,33 +11,23 @@ import Navigation from "./components/Navigation";
 import Login from "./routes/Login";
 import Register from "./routes/Register";
 import VolcanoList from "./routes/VolcanoList";
+import Volcano from "./routes/Volcano";
 
 function App() {
-  const [token, setToken] = useState(null);
-  const [cookies] = useCookies(["token"]);
-
-  useEffect(() => {
-    // Check login status
-    if (cookies.token !== null && cookies.token !== undefined) {
-      setToken(cookies.token);
-    }
-    // Ignore dependency error on cookies.token. This effect
-    // only needs to run once on initial load of App. Token
-    // updates are done elsewhere.
-    // eslint-disable-next-line
-  }, []);
+  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
 
   return (
     <BrowserRouter>
       <div className="App">
-        <Navigation login={token} />
+        <Navigation cookies={cookies}/>
         <Routes>
           <Route path="/" element={<h1>Home</h1>} />
-          <Route path="/volcano-list" element={<VolcanoList />} />
+          <Route path="/volcano-list" element={<VolcanoList cookies={cookies} />} />
+          <Route path="/volcano" element={<Volcano cookies={cookies} />} />
           <Route path="/register" element={<Register />} />
           <Route
             path="/login"
-            element={<Login token={token} setToken={setToken} />}
+            element={<Login cookies={cookies} setCookie={setCookie} removeCookie={removeCookie}/>}
           />
         </Routes>
       </div>

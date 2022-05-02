@@ -23,10 +23,18 @@ body {
   padding: 0;
 }
 
+.mb-0 {
+  margin-bottom: 0;
+}
+
 .vertical-center {
   display: flex;
   align-items: center;
   margin-bottom: 0;
+}
+
+.no-padding-left {
+  padding-left: 0;
 }
 
 .navBar {
@@ -52,7 +60,10 @@ body {
 
 .containerType {
   padding-top: 2vh;
+  padding-bottom: 2vh;
   padding-left: 2vw;
+  padding-right: 2vw;
+  overflow-wrap: break-word;
 }
 
 .formType .error {
@@ -71,15 +82,15 @@ body {
   background-color: #f86624;
 }
 
-.caret {
+.formType .caret {
   padding-left: 8px;
   background: #252323;
 }
 
-.caret:hover {
+.formType .caret:hover {
   background: #f86624;
 }
 
-.caret:focus {
+.formType .caret:focus {
   background-color: #f86624;
 }

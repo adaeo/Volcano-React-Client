@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useCookies } from "react-cookie";
+
 
 // Component Import
 import LoginForm from "../components/LoginForm";
@@ -14,7 +14,6 @@ export default function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [cookies, setCookie, removeCookie] = useCookies(["token"]);
 
   async function login(email, password) {
     try {
@@ -37,8 +36,7 @@ export default function Login(props) {
         }
       } else {
         let data = await res.json();
-        setCookie("token", data.token, { path: "/", maxAge: data.expires_in });
-        props.setToken(cookies.token);
+        await props.setCookie("token", data.token, { path: "/", maxAge: data.expires_in });
         navigate("/"); // Navigate to home page
       }
     } catch (err) {
@@ -47,12 +45,10 @@ export default function Login(props) {
   }
 
   async function logout() {
-    props.setToken(null);
-    removeCookie("token", {path: "/"});
+    props.removeCookie("token", {path: "/"});
   }
-
-  console.log(props.token);
-  return props.token === null ? (
+  
+  return !props.cookies.token ? (
     <LoginForm
       email={email}
       setEmail={setEmail}

@@ -7,7 +7,7 @@ import RegisterComplete from "../components/RegisterComplete";
 const API_URL = "http://sefdb02.qut.edu.au:3001";
 const url = `${API_URL}/user/register`;
 
-export default function Register(props) {
+export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPwd, setConfirmPwd] = useState("");
