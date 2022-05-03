@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { Container, Row, Col } from "reactstrap";
+
+// component import
+import InfoBox from "../components/InfoBox";
+import WikiBox from "../components/WikiBox";
 
 const API_URL = "http://sefdb02.qut.edu.au:3001";
 
 export default function Volcano(props) {
   const [searchParams] = useSearchParams();
   const id = searchParams.get("id");
-  const [volcanoData, setVolcanoData] = useState(null);
+  const [volcano, setVolcano] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -22,18 +27,38 @@ export default function Volcano(props) {
         },
       };
 
-      let res = props.cookies.token ? await fetch(url, headers) : await fetch(url);
+      let res = props.cookies.token
+        ? await fetch(url, headers)
+        : await fetch(url);
       let data = await res.json();
-      console.log(data);
+      setVolcano(data);
     })();
     // eslint-disable-next-line
   }, []);
 
-  return (
-    <div className="containerType">
-      <h3>
-        {props.cookies.token ? `${id} and ${props.cookies.token}` : `${id}`}
-      </h3>
-    </div>
-  );
+  if (volcano === null) {
+    return (
+      <Container className="containerType">
+        <p>Loading...</p>
+      </Container>
+    );
+  } else {
+    return (
+      <Container className="containerType" fluid>
+        <Row xs="1">
+          <Col>
+            <h1>{volcano.name}</h1>
+          </Col>
+        </Row>
+        <Row xs="2">
+          <Col xs="auto">
+            <InfoBox volcano={volcano} cookies={props.cookies}/>
+          </Col>
+          <Col className="fillCol">
+            <WikiBox volcano={volcano} />
+          </Col>
+        </Row>
+      </Container>
+    );
+  }
 }

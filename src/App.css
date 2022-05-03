@@ -64,6 +64,7 @@ body {
   padding-left: 2vw;
   padding-right: 2vw;
   overflow-wrap: break-word;
+  max-width: 100%;
 }
 
 .formType .error {
@@ -93,4 +94,24 @@ body {
 
 .formType .caret:focus {
   background-color: #f86624;
+}
+
+.infoBox {
+  padding: 1em 1em 1em 1em;
+  margin: 2vh 0 0 0;
+  border: 1px solid black;
+}
+
+.wikiBox {
+  margin-left: 1em;
+  margin-right: 1em;
+  border: 1px solid black;
+}
+
+.infoRow {
+  margin-bottom: 1em;
+}
+
+.fillCol {
+  flex-grow: 1;
 }

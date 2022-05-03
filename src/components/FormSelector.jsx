@@ -98,7 +98,7 @@ export default function VolcanoList(props) {
 
   function handleSubmit() {
     if (queryCountry === "") {
-      props.setCountry(0); // Return empty code
+      props.setCountry(-1); // Return empty code
     } else {
       props.setCountry(
         // Submit capatalised word.

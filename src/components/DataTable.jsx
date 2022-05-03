@@ -12,9 +12,7 @@ export default function DataTable(props) {
   const navigate = useNavigate();
 
   function navigateTo(id) {
-    props.token
-      ? navigate(`/volcano/?id=${id}&token=${props.token}`)
-      : navigate(`/volcano/?id=${id}`);
+    navigate(`/volcano/?id=${id}`);
   }
 
   async function getVolcanoes(country, range) {

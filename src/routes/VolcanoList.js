@@ -10,7 +10,8 @@ const url = `${API_URL}/countries`;
 
 export default function VolcanoList(props) {
   const [countries, setCountries] = useState([]);
-  const [country, setCountry] = useState("");
+  const [country, setCountry] = useState(null);
+
 
   useEffect(() => {
     (async () => {
@@ -51,5 +52,10 @@ export default function VolcanoList(props) {
         </Row>
       </Container>
     );
+  }
+  else {
+    <Container className="containerType">
+      <h1>Something went wrong...</h1>
+    </Container>
   }
 }
