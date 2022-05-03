@@ -33,6 +33,11 @@ body {
   margin-bottom: 0;
 }
 
+.margin-center {
+  margin: auto;
+  text-align: center;
+}
+
 .no-padding-left {
   padding-left: 0;
 }
@@ -60,7 +65,7 @@ body {
 
 .containerType {
   padding-top: 2vh;
-  padding-bottom: 2vh;
+  padding-bottom: 0vh;
   padding-left: 2vw;
   padding-right: 2vw;
   overflow-wrap: break-word;
@@ -103,9 +108,8 @@ body {
 }
 
 .wikiBox {
-  margin-left: 1em;
-  margin-right: 1em;
-  border: 1px solid black;
+  padding-left: 1em;
+  padding-right: 1em;
 }
 
 .infoRow {
@@ -114,4 +118,16 @@ body {
 
 .fillCol {
   flex-grow: 1;
+}
+
+.mapType {
+  height: 30em;
+  padding: 0;
+}
+
+.chartType {
+  padding-top: 0;
+  background-color: #252323;
+  color: #fff;
+  height: 100%;
 }

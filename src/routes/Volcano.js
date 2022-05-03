@@ -5,6 +5,8 @@ import { Container, Row, Col } from "reactstrap";
 // component import
 import InfoBox from "../components/InfoBox";
 import WikiBox from "../components/WikiBox";
+import VolcanoMap from "../components/VolcanoMap";
+import PopulationChart from "../components/PopulationChart";
 
 const API_URL = "http://sefdb02.qut.edu.au:3001";
 
@@ -52,10 +54,20 @@ export default function Volcano(props) {
         </Row>
         <Row xs="2">
           <Col xs="auto">
-            <InfoBox volcano={volcano} cookies={props.cookies}/>
+            <InfoBox volcano={volcano} cookies={props.cookies} />
           </Col>
           <Col className="fillCol">
-            <WikiBox volcano={volcano} />
+            <Row>
+              <WikiBox volcano={volcano} />
+            </Row>
+            <Row xs="2">
+              <Col>
+                <PopulationChart alt="Marked chart of volcano" volcano={volcano} cookies={props.cookies} />
+              </Col>
+              <Col>
+                <VolcanoMap volcano={volcano} />
+              </Col>
+            </Row>
           </Col>
         </Row>
       </Container>

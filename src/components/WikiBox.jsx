@@ -9,7 +9,7 @@ export default function WikiBox(props) {
 
   function ArticleLink(props) {
     if (props.link) {
-      return <a href={props.link}>[Wikipedia Link]</a>;
+      return <a href={props.link} target="_blank" rel="noreferrer noopener">[Wikipedia Link]</a>;
     }
   }
 
@@ -18,7 +18,7 @@ export default function WikiBox(props) {
 
     let searchQuery = volcano.name.includes("volcan")
       ? `${volcano.name}`
-      : `${volcano.name}%20volcan`;
+      : `${volcano.name}%20${volcano.country}%20volcano%20volcanic`;
 
     const params = {
       action: "query",
@@ -50,7 +50,7 @@ export default function WikiBox(props) {
       return [null, null];
     }
 
-    return [search.title, search.pageid];
+    return await [search.title, search.pageid];
   }
 
   async function getWikiExtract(title, pageid) {
@@ -101,7 +101,8 @@ export default function WikiBox(props) {
 
   if (volcanoExtract) {
     return (
-      <Container className="containerType">
+      <Container className="containerType wikiBox">
+      <h3>Summary</h3>
         <p>
           {`${volcanoExtract} `} <ArticleLink link={articleLink} />
         </p>
@@ -109,8 +110,8 @@ export default function WikiBox(props) {
     );
   } else {
     return (
-      <Container className="containerType">
-        <h2>Fetching Wikipedia Article...</h2>
+      <Container className="containerType wikiBox">
+        <h2>Fetching Wikipedia Article...Please Wait...</h2>
       </Container>
     );
   }

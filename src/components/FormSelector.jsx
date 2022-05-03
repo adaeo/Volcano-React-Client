@@ -153,7 +153,7 @@ export default function VolcanoList(props) {
         {props.token !== null && <DropdownRangeComponent />}
         <Col className="auto-width vertical-center">
           <Button className="formButton" onClick={handleSubmit}>
-            Submit
+            Search
           </Button>
         </Col>
       </Row>
