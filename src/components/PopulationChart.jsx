@@ -20,7 +20,7 @@ export default function PopulationChart(props) {
     return (
       <Container className="containerType">
         <Row>
-          <h1>Chart</h1>
+          <h1>Population by Distance</h1>
         </Row>
         <Row>
           <Bar

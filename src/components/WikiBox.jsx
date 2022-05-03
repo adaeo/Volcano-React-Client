@@ -18,7 +18,7 @@ export default function WikiBox(props) {
 
     let searchQuery = volcano.name.includes("volcan")
       ? `${volcano.name}`
-      : `${volcano.name}%20${volcano.country}%20volcano%20volcanic`;
+      : `${volcano.name}%20volcano`;
 
     const params = {
       action: "query",
