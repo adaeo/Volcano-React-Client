@@ -16,13 +16,17 @@ export default function WikiBox(props) {
   async function getWikiTitle(volcano) {
     let searchURL = wikiURL;
 
+    let searchQuery = volcano.name.includes("volcan")
+      ? `${volcano.name}`
+      : `${volcano.name}%20volcan`;
+
     const params = {
       action: "query",
       list: "search",
       format: "json",
       utf8: "1",
       srlimit: "2",
-      srsearch: `${volcano.name}%20volcano`,
+      srsearch: searchQuery,
     };
 
     Object.keys(params).forEach((key) => {
