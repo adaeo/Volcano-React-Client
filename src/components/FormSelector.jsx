@@ -98,18 +98,25 @@ export default function VolcanoList(props) {
 
   function handleSubmit() {
     if (queryCountry === "") {
-      props.setCountry(-1); // Return empty code
+      props.setEmpty(true); // Return empty code
     } else {
+      props.setEmpty(false);
       props.setCountry(
         // Submit capatalised word.
         queryCountry.charAt(0).toUpperCase() + queryCountry.slice(1)
       );
     }
+    props.setInitSubmit(true);
     props.setRange(queryRange);
   }
 
   return (
-    <Form className="formType mb-3">
+    <Form
+      className="formType mb-3"
+      onSubmit={(e) => {
+        e.preventDefault();
+      }}
+    >
       <Row xs="auto">
         <Col className="auto-width vertical-center">
           <div className="mb-0">

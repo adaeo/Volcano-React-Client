@@ -86,16 +86,25 @@ export default function DataTable(props) {
   }
 
   return (
-    <div className="ag-theme-alpine-dark formType" style={{ height: "100%" }}>
-      <AgGridReact
-        columnDefs={columns}
-        rowData={rowData}
-        pagination={true}
-        paginationPageSize={15}
-        domLayout={"autoHeight"}
-        onGridReady={onGridReady}
-        onRowClicked={(row) => navigateTo(row.data.id)}
-      />
+    <div>
+      {rowData.length === 0 && props.initSubmit && !props.empty && (
+        <p className="error">
+          {props.country} is an invalid country! Please choose from the dropdown
+          box.
+        </p>
+      )}
+      {props.empty && <p className="error">You must specify a country!</p>}
+      <div className="ag-theme-alpine-dark formType" style={{ height: "100%" }}>
+        <AgGridReact
+          columnDefs={columns}
+          rowData={rowData}
+          pagination={true}
+          paginationPageSize={15}
+          domLayout={"autoHeight"}
+          onGridReady={onGridReady}
+          onRowClicked={(row) => navigateTo(row.data.id)}
+        />
+      </div>
     </div>
   );
 }

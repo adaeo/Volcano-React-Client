@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { Container, Row, Col } from "reactstrap";
+import { useNavigate } from "react-router-dom";
+import { Container, Row, Col, Button } from "reactstrap";
 
 // import components
 import FormSelector from "../components/FormSelector";
@@ -9,16 +10,24 @@ const API_URL = "http://sefdb02.qut.edu.au:3001";
 const url = `${API_URL}/countries`;
 
 export default function VolcanoList(props) {
+  const navigate = useNavigate();
+
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState(null);
-
+  const [empty, setEmpty] = useState(false);
+  const [initSubmit, setInitSubmit] = useState(false);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     (async () => {
       let res = await fetch(url);
-      let data = await res.json();
-      await setCountries(Object.values(data));
-      await setCountry(Object.values(data)[0]);
+      if (res.status === 200) {
+        let data = await res.json();
+        await setCountries(Object.values(data));
+        await setCountry(Object.values(data)[0]);
+      } else if (res.status === 400 || res.status === 401) {
+        setError(true);
+      }
     })();
   }, []);
 
@@ -42,20 +51,39 @@ export default function VolcanoList(props) {
           range={range}
           setRange={setRange}
           ranges={ranges}
+          setEmpty={setEmpty}
+          setInitSubmit={setInitSubmit}
         />
         <Row xs="1">
           <DataTable
             token={props.cookies.token}
             country={country}
             range={range}
+            empty={empty}
+            initSubmit={initSubmit}
           />
         </Row>
       </Container>
     );
-  }
-  else {
-    <Container className="containerType">
-      <h1>Something went wrong...</h1>
-    </Container>
+  } else if (error) {
+    return (
+      <Container className="containerType formType">
+        <h3>Something went wrong...</h3>
+        <Button
+          className="formButton"
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          Return Home
+        </Button>
+      </Container>
+    );
+  } else {
+    return (
+      <Container className="containerType">
+        <h3>Loading...</h3>
+      </Container>
+    );
   }
 }

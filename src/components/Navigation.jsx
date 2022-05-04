@@ -8,7 +8,7 @@ export default function Navigation(props) {
     <div className="navBar">
       <Navbar dark>
         <NavbarBrand to="/" tag={Link}>
-          Volcanoes of the World
+          Volcano World
         </NavbarBrand>
         <Nav className="nav">
           <NavItem>

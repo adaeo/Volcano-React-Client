@@ -76,7 +76,7 @@ export default function WikiBox(props) {
     const params = {
       action: "query",
       prop: "extracts",
-      exsentences: "10",
+      exsentences: "15",
       exlimit: "1",
       exintro: "1",
       titles: title,

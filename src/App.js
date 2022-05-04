@@ -13,6 +13,7 @@ import Home from "./routes/Home";
 import Register from "./routes/Register";
 import VolcanoList from "./routes/VolcanoList";
 import Volcano from "./routes/Volcano";
+import Footer from "./components/Footer";
 
 function App() {
   const [cookies, setCookie, removeCookie] = useCookies(["token"]);
@@ -20,17 +21,29 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        <Navigation cookies={cookies}/>
-        <Routes>
-          <Route path="/" element={<Home cookies={cookies} />} />
-          <Route path="/volcano-list" element={<VolcanoList cookies={cookies} />} />
-          <Route path="/volcano" element={<Volcano cookies={cookies} />} />
-          <Route path="/register" element={<Register />} />
-          <Route
-            path="/login"
-            element={<Login cookies={cookies} setCookie={setCookie} removeCookie={removeCookie}/>}
-          />
-        </Routes>
+        <Navigation cookies={cookies} />
+        <div className="content">
+          <Routes>
+            <Route path="/" element={<Home cookies={cookies} />} />
+            <Route
+              path="/volcano-list"
+              element={<VolcanoList cookies={cookies} />}
+            />
+            <Route path="/volcano" element={<Volcano cookies={cookies} removeCookie={removeCookie}/>} />
+            <Route path="/register" element={<Register />} />
+            <Route
+              path="/login"
+              element={
+                <Login
+                  cookies={cookies}
+                  setCookie={setCookie}
+                  removeCookie={removeCookie}
+                />
+              }
+            />
+          </Routes>
+        </div>
+        <Footer />
       </div>
     </BrowserRouter>
   );
