@@ -9,16 +9,28 @@ export default function WikiBox(props) {
 
   function ArticleLink(props) {
     if (props.link) {
-      return <a href={props.link} target="_blank" rel="noreferrer noopener">[Wikipedia Link]</a>;
+      return (
+        <a href={props.link} target="_blank" rel="noreferrer noopener">
+          [Wikipedia Link]
+        </a>
+      );
     }
   }
 
   async function getWikiTitle(volcano) {
     let searchURL = wikiURL;
 
-    let searchQuery = volcano.name.includes("volcan")
+    let searchQuery = volcano.name.includes("Volcan")
       ? `${volcano.name}`
-      : `${volcano.name}%20volcano`;
+      : `${volcano.name}%20volcano%20${volcano.country}}`;
+
+    // Very specific edge case due to Wikipedia search
+    if (volcano.country === "DR Congo") {
+      searchQuery = `${volcano.name}%20volcano%20$Congo`;
+    }
+    if (volcano.country === "Undersea") {
+      return [null, null];
+    }
 
     const params = {
       action: "query",
@@ -41,6 +53,7 @@ export default function WikiBox(props) {
       },
     });
     let data = await res.json();
+    console.log(data);
     let search = await data.query.search[0];
     if (data.query.search.length > 1) {
       if (search.title.includes("List of volcanoes")) {
@@ -102,7 +115,7 @@ export default function WikiBox(props) {
   if (volcanoExtract) {
     return (
       <Container className="containerType wikiBox">
-      <h3>Summary</h3>
+        <h3>Summary</h3>
         <p>
           {`${volcanoExtract} `} <ArticleLink link={articleLink} />
         </p>

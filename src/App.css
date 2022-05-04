@@ -131,3 +131,31 @@ body {
   color: #fff;
   height: 100%;
 }
+
+.hero-banner {
+  background-image: url("./img/hero.jpg");
+  background-size: cover;
+  min-height: 35em;
+}
+
+.hero-banner h1 {
+  text-align: center;
+  margin: auto;
+  font-size: 4em;
+  color: #fff;
+}
+
+.home-section {
+  padding: 3em;
+  text-align: center;
+}
+
+.home-section .home-col {
+  border-right: 1px solid black;
+}
+
+.home-image {
+  margin-top: 1em;
+  width: 100%;
+  height: auto;
+}

@@ -9,6 +9,7 @@ import "./App.css";
 // component import
 import Navigation from "./components/Navigation";
 import Login from "./routes/Login";
+import Home from "./routes/Home";
 import Register from "./routes/Register";
 import VolcanoList from "./routes/VolcanoList";
 import Volcano from "./routes/Volcano";
@@ -21,7 +22,7 @@ function App() {
       <div className="App">
         <Navigation cookies={cookies}/>
         <Routes>
-          <Route path="/" element={<h1>Home</h1>} />
+          <Route path="/" element={<Home cookies={cookies} />} />
           <Route path="/volcano-list" element={<VolcanoList cookies={cookies} />} />
           <Route path="/volcano" element={<Volcano cookies={cookies} />} />
           <Route path="/register" element={<Register />} />
