@@ -12,7 +12,7 @@ import {
 
 export default function LoginForm(props) {
   return (
-    <Container className="containerType formType" fluid>
+    <Container className="container-type form-type" fluid>
       <Row xs="1">
         <Col>
           <h1>Login</h1>
@@ -53,7 +53,7 @@ export default function LoginForm(props) {
             </FormGroup>
           </Form>
           <Button
-            className="formButton"
+            className="form-button"
             onClick={() => {
               props.login(props.email, props.password);
             }}

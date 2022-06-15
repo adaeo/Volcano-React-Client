@@ -17,6 +17,7 @@ export default function VolcanoList(props) {
   const [empty, setEmpty] = useState(false);
   const [initSubmit, setInitSubmit] = useState(false);
   const [error, setError] = useState(false);
+  const [timeout, setTimeout] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -27,6 +28,8 @@ export default function VolcanoList(props) {
         await setCountry(Object.values(data)[0]);
       } else if (res.status === 400 || res.status === 401) {
         setError(true);
+      } else if (res.status === 429) {
+        setTimeout(true);
       }
     })();
   }, []);
@@ -35,9 +38,26 @@ export default function VolcanoList(props) {
 
   const [range, setRange] = useState(ranges[0]);
 
+
+  if (timeout) {
+    return (
+      <Container className="container-type form-type">
+        <p className="error">Too many requests! Please wait 3 minutes before trying again.</p>
+        <Button
+          onClick={() => {
+            navigate("/");
+          }}
+          className="form-button"
+        >
+          Back Home
+        </Button>
+      </Container>
+    );
+  }
+
   if (countries && country) {
     return (
-      <Container className="containerType" fluid>
+      <Container className="container-type" fluid>
         <Row xs="1">
           <Col>
             <h1>Volcano List</h1>
@@ -59,6 +79,7 @@ export default function VolcanoList(props) {
             token={props.cookies.token}
             country={country}
             range={range}
+            setEmpty={setEmpty}
             empty={empty}
             initSubmit={initSubmit}
           />
@@ -67,10 +88,10 @@ export default function VolcanoList(props) {
     );
   } else if (error) {
     return (
-      <Container className="containerType formType">
+      <Container className="container-type form-type">
         <h3>Something went wrong...</h3>
         <Button
-          className="formButton"
+          className="form-button"
           onClick={() => {
             navigate("/");
           }}
@@ -81,7 +102,7 @@ export default function VolcanoList(props) {
     );
   } else {
     return (
-      <Container className="containerType">
+      <Container className="container-type">
         <h3>Loading...</h3>
       </Container>
     );

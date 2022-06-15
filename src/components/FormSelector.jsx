@@ -112,7 +112,7 @@ export default function VolcanoList(props) {
 
   return (
     <Form
-      className="formType mb-3"
+      className="form-type mb-3"
       onSubmit={(e) => {
         e.preventDefault();
       }}
@@ -159,7 +159,7 @@ export default function VolcanoList(props) {
         </Col>
         {props.token !== null && <DropdownRangeComponent />}
         <Col className="auto-width vertical-center">
-          <Button className="formButton" onClick={handleSubmit}>
+          <Button className="form-button" onClick={handleSubmit}>
             Search
           </Button>
         </Col>

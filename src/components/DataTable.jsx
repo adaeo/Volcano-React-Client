@@ -21,6 +21,9 @@ export default function DataTable(props) {
         ? `${API_URL}/volcanoes?country=${country}`
         : `${API_URL}/volcanoes?country=${country}&populatedWithin=${range}`;
     let res = await fetch(url);
+    if (res.status === 400) {
+      props.setEmpty(true);
+    }
     let data = await res.json();
     let formattedData = data.map((volcano) => ({
       id: volcano.id,
@@ -86,7 +89,7 @@ export default function DataTable(props) {
   }
 
   return (
-    <div>
+    <div className="mb-2">
       {rowData.length === 0 && props.initSubmit && !props.empty && (
         <p className="error">
           {props.country} is an invalid country! Please choose from the dropdown
@@ -94,7 +97,7 @@ export default function DataTable(props) {
         </p>
       )}
       {props.empty && <p className="error">You must specify a country!</p>}
-      <div className="ag-theme-alpine-dark formType" style={{ height: "100%" }}>
+      <div className="ag-theme-alpine-dark form-type" style={{ height: "100%" }}>
         <AgGridReact
           columnDefs={columns}
           rowData={rowData}

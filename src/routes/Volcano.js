@@ -17,6 +17,7 @@ export default function Volcano(props) {
   const id = searchParams.get("id");
   const [volcano, setVolcano] = useState(null);
   const [relog, setRelog] = useState(false);
+  const [timeout, setTimeout] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -38,39 +39,57 @@ export default function Volcano(props) {
       if (res.status === 200) {
         let data = await res.json();
         setVolcano(data);
-      } else if (res.status === 401) {
+      } else if (res.status === 401 || res.status === 400) {
         setRelog(true);
-        console.log(true)
+      } else if (res.status === 429) {
+        setTimeout(true);
       }
     })();
     // eslint-disable-next-line
   }, []);
 
-  if (relog === true) {
+  if (timeout) {
     return (
-    <Container className="containerType formType">
-      <h3>Login expired. Please click below to login again.</h3>
-      <Button
-        onClick={() => {
-          props.removeCookie("token");
-          navigate("/login");
-        }}
-        className="formButton"
-      >
-        Login
-      </Button>
-    </Container>);
+      <Container className="container-type form-type">
+        <h3>Too many requests! Please wait 3 minutes before trying again.</h3>
+        <Button
+          onClick={() => {
+            navigate("/");
+          }}
+          className="form-button"
+        >
+          Back Home
+        </Button>
+      </Container>
+    );
+  }
+
+  if (relog) {
+    return (
+      <Container className="container-type form-type">
+        <p className="error">Login expired. Please click below to login again.</p>
+        <Button
+          onClick={() => {
+            props.removeCookie("token");
+            navigate("/login");
+          }}
+          className="form-button"
+        >
+          Login
+        </Button>
+      </Container>
+    );
   }
 
   if (volcano === null) {
     return (
-      <Container className="containerType">
+      <Container className="container-type">
         <p>Loading...</p>
       </Container>
     );
   } else {
     return (
-      <Container className="containerType mb-2" fluid>
+      <Container className="container-type mb-2" fluid>
         <Row xs="1">
           <Col>
             <h1>{volcano.name}</h1>
@@ -80,7 +99,7 @@ export default function Volcano(props) {
           <Col xs="auto">
             <InfoBox volcano={volcano} cookies={props.cookies} />
           </Col>
-          <Col className="fillCol">
+          <Col className="fill-col">
             <Row xs="2">
               <Col>
                 <PopulationChart

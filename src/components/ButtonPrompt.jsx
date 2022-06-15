@@ -10,7 +10,7 @@ export default function ButtonPrompt(props) {
         onClick={() => {
           navigate("/volcano-list");
         }}
-        className="formButton mt-4"
+        className="form-button mt-4"
       >
         View Volcanoes
       </Button>
@@ -21,7 +21,7 @@ export default function ButtonPrompt(props) {
         onClick={() => {
           navigate("/register");
         }}
-        className="formButton mt-4"
+        className="form-button mt-4"
       >
         Register Now
       </Button>

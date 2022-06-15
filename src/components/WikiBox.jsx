@@ -114,7 +114,7 @@ export default function WikiBox(props) {
 
   if (volcanoExtract) {
     return (
-      <Container className="containerType wikiBox">
+      <Container className="container-type wiki-box">
         <h3>Summary</h3>
         <p>
           {`${volcanoExtract} `} <ArticleLink link={articleLink} />
@@ -123,7 +123,7 @@ export default function WikiBox(props) {
     );
   } else {
     return (
-      <Container className="containerType wikiBox">
+      <Container className="container-type wiki-box">
         <h2>Fetching Wikipedia Article...Please Wait...</h2>
       </Container>
     );

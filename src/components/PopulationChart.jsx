@@ -18,8 +18,8 @@ export default function PopulationChart(props) {
     });
 
     return (
-      <Container className="containerType">
-        <Row>
+      <Container className="container-type">
+        <Row className="chart-row">
           <h1>Population by Distance</h1>
         </Row>
         <Row>
@@ -32,9 +32,9 @@ export default function PopulationChart(props) {
                   label: "population count",
                   data: volcanoData,
                   // bar color
-                  backgroundColor: ["#f86624", "#f86624", "#f86624", "#f86624"],
+                  backgroundColor: ["#d54101", "#d54101", "#d54101", "#d54101"],
                   // bar border
-                  borderColor: ["#f86624", "#f86624", "#f86624", "#f86624"],
+                  borderColor: ["#000000", "#000000", "#000000", "#000000"],
                   borderWidth: 1,
                 },
               ],
@@ -74,13 +74,13 @@ export default function PopulationChart(props) {
 
   if (!props.cookies.token) {
     return (
-      <Container className="containerType chartType vertical-center ">
+      <Container className="container-type chart-type vertical-center ">
         <h1 className="margin-center">Create an account to see this chart!</h1>
       </Container>
     );
   } else {
     return (
-      <Container className="containerType chartType vertical-center">
+      <Container className="container-type chart-type vertical-center">
         <BarGraph volcano={props.volcano} />
       </Container>
     );

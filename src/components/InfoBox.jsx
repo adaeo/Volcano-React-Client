@@ -3,7 +3,7 @@ import { Container } from "reactstrap";
 export default function InfoBox(props) {
   return (
     <Container className="no-padding">
-      <div className="infoBox">
+      <div className="info-box">
         <div>
           <p><b>Name:</b> {props.volcano.name}</p>
           <p><b>Country:</b> {props.volcano.country}</p>

@@ -6,7 +6,7 @@ export default function RegisterComplete() {
   const navigate = useNavigate();
 
   return (
-    <Container className="containerType formType" fluid>
+    <Container className="container-type form-type" fluid>
       <Row xs="1">
         <Col>
           <h1>Registration completed!</h1>
@@ -18,7 +18,7 @@ export default function RegisterComplete() {
       <Row xs="3">
         <Col>
           <Button
-            className="formButton"
+            className="form-button"
             onClick={() => {
               navigate("/login");
             }}

@@ -8,7 +8,7 @@ import {
 
 export default function LogoutForm(props) {
   return (
-    <Container className="containerType formType" fluid>
+    <Container className="container-type form-type" fluid>
       <Row xs="1">
         <Col>
           <h1>Logout</h1>
@@ -18,7 +18,7 @@ export default function LogoutForm(props) {
       <Row xs="2">
         <Col>
           <Button
-            className="formButton"
+            className="form-button"
             onClick={() => {
               props.logout();
             }}

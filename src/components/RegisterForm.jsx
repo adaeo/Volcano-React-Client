@@ -12,7 +12,7 @@ import {
 
 export default function RegisterForm(props) {
   return (
-    <Container className="containerType formType" fluid>
+    <Container className="container-type form-type" fluid>
       <Row xs="1">
         <Col>
           <h1>Register</h1>
@@ -65,7 +65,7 @@ export default function RegisterForm(props) {
             </FormGroup>
           </Form>
           <Button
-            className="formButton"
+            className="form-button"
             onClick={() => {
               props.register(props.email, props.password, props.confirmPwd);
             }}

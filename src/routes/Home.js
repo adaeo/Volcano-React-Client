@@ -9,10 +9,10 @@ export default function Home(props) {
   return (
     <main>
       <Container
-        className="containerType hero-banner vertical-center"
+        className="container-type hero-banner vertical-center"
         title="Image of Mount Fuji"
       >
-        <h1>Welcome to Volcano World!</h1>
+        <h1>Welcome to Volcanoes of the World</h1>
       </Container>
       <HomeBox token={token} />
     </main>

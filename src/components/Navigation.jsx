@@ -5,10 +5,10 @@ import { Navbar, Nav, NavItem, NavLink, NavbarBrand } from "reactstrap";
 
 export default function Navigation(props) {
   return (
-    <div className="navBar">
+    <div className="nav-bar">
       <Navbar dark>
         <NavbarBrand to="/" tag={Link}>
-          Volcano World
+          Volcanoes of the World
         </NavbarBrand>
         <Nav className="nav">
           <NavItem>

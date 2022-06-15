@@ -8,12 +8,12 @@ export default function VolcanoMap(props) {
 
   const [center, setCenter] = useState([lat, lon]);
 
-  const [zoom, setZoom] = useState(10);
-  const color = `hsl(19deg, 94%, 56%)`;
+  const [zoom, setZoom] = useState(4);
+  const color = `hsl(18deg, 99%, 42%)`;
 
   if (lon && lat) {
     return (
-      <Container className="containerType mapType">
+      <Container className="container-type map-type">
         <Map
           center={center}
           zoom={zoom}
@@ -30,7 +30,7 @@ export default function VolcanoMap(props) {
             color={color}
             onClick={() => {
               setCenter([lat, lon]);
-              setZoom(12);
+              setZoom(10);
             }}
           />
         </Map>
